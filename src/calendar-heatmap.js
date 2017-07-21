@@ -11,7 +11,7 @@ function calendarHeatmap() {
   var SQUARE_LENGTH = 13;
   var SQUARE_PADDING = 1;
   var MONTH_LABEL_PADDING = 6;
-  var now = moment().endOf('day').toDate();
+  var yesterday = moment().endOf('day').subtract(1, 'days').toDate();
   var yearAgo = moment().startOf('day').subtract(1, 'year').toDate();
   var data = [];
   var colorRange = ['#bcd9d8', '#218380'];
@@ -103,7 +103,7 @@ function calendarHeatmap() {
   function chart() {
     d3.select(chart.selector()).selectAll('svg.calendar-heatmap').remove(); // remove the existing chart, if it exists
     if(!chart.dateRange()) {
-      dateRange = d3.time.days(yearAgo, now); // generates an array of date objects within the specified range  
+      dateRange = d3.time.days(yearAgo, yesterday); // generates an array of date objects within the specified range  
     }
 
     // remove data outside the date range
@@ -220,7 +220,7 @@ function calendarHeatmap() {
 
       // color future dates with no data using light color and prevent user interactions on them
       dayRects.filter(function(d) {
-          return d > now && daysOfChart.indexOf(d.toDateString()) <= -1;
+          return d > yesterday && daysOfChart.indexOf(d.toDateString()) <= -1;
         })
         .attr('fill', futureColor)
         .on('mouseover', null)
