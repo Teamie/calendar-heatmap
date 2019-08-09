@@ -145,7 +145,7 @@ module.exports = function () {
     d3.select(chart.selector()).selectAll('svg.calendar-heatmap').remove();
     if(!chart.dateRange()) {
       // generates an array of date objects within the specified range
-      dateRange = d3.time.days(yearAgo, yesterday);
+      dateRange = d3.timeDays(yearAgo, yesterday);
     }
 
     // remove data outside the date range
@@ -157,7 +157,7 @@ module.exports = function () {
       (d.date < end || d.date.getTime() === end.getTime());
     });
 
-    var monthRange = d3.time.months(moment(dateRange[0]).startOf('month').toDate(), dateRange[dateRange.length - 1]); // it ignores the first month if the 1st date is after the start of the month
+    var monthRange = d3.timeMonths(moment(dateRange[0]).startOf('month').toDate(), dateRange[dateRange.length - 1]); // it ignores the first month if the 1st date is after the start of the month
     var firstDate = moment(dateRange[0]);
     if (chart.data().length == 0) {
       max = 10;
@@ -319,7 +319,7 @@ module.exports = function () {
       svg.append('g')
         .attr('transform', 'translate(-1,' + (MONTH_LABEL_PADDING-1) + ')')
         .selectAll('.monthpath')
-        .data(d3.time.months(new Date(year, 0, 1), new Date(year + 1, 0, 1)))
+        .data(d3.timeMonths(new Date(year, 0, 1), new Date(year + 1, 0, 1)))
         .enter().append('path')
         .attr('class', 'monthpath')
         .attr('d', monthPath);
@@ -380,8 +380,8 @@ module.exports = function () {
     function monthPath(t0) {
       var cellSize = SQUARE_LENGTH + SQUARE_PADDING;
       var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
-          d0 = t0.getDay(), w0 = d3.time.weekOfYear(t0),
-          d1 = t1.getDay(), w1 = d3.time.weekOfYear(t1);
+          d0 = t0.getDay(), w0 = d3.timeWeek.count(d3.timeYear(t0), t0),
+          d1 = t1.getDay(), w1 = d3.timeWeek.count(d3.timeYear(t1), t1);
       return 'M' + (w0 + 1) * cellSize + ',' + d0 * cellSize +
           'H' + w0 * cellSize + 'V' + 7 * cellSize +
           'H' + w1 * cellSize + 'V' + (d1 + 1) * cellSize +
