@@ -1,5 +1,8 @@
+require('core-js/features/array/find');
+const moment = require('moment');
+const d3 = require('d3');
 
-function calendarHeatmap() {
+module.exports = function () {
   // defaults
   var width = 750;
   var height = 110;
@@ -388,31 +391,4 @@ function calendarHeatmap() {
   }
 
   return chart;
-}
-
-
-// polyfill for Array.find() method
-/* jshint ignore:start */
-if (!Array.prototype.find) {
-  Array.prototype.find = function (predicate) {
-    if (this === null) {
-      throw new TypeError('Array.prototype.find called on null or undefined');
-    }
-    if (typeof predicate !== 'function') {
-      throw new TypeError('predicate must be a function');
-    }
-    var list = Object(this);
-    var length = list.length >>> 0;
-    var thisArg = arguments[1];
-    var value;
-
-    for (var i = 0; i < length; i++) {
-      value = list[i];
-      if (predicate.call(thisArg, value, i, list)) {
-        return value;
-      }
-    }
-    return undefined;
-  };
-}
-/* jshint ignore:end */
+};

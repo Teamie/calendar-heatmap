@@ -1,22 +1,13 @@
 {
   "name": "calendar-heatmap",
-  "version": "1.0.0",
-  "description": "This repo is forked from [calendar-heatmap](https://github.com/DKirwan/calendar-heatmap), with a few additional features and modificaitons:",
+  "version": "1.0.1",
+  "description": "This repo is forked from [calendar-heatmap](https://github.com/DKirwan/calendar-heatmap), with a few additional features and modificaitons",
   "main": "src/calendar-heatmap.js",
-  "directories": {
-    "example": "example"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Teamie/calendar-heatmap.git"
-  },
-  "author": "",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Teamie/calendar-heatmap/issues"
-  },
-  "homepage": "https://github.com/Teamie/calendar-heatmap#readme"
+  "homepage": "https://github.com/Teamie/calendar-heatmap#readme",
+  "dependencies": {
+    "core-js": "^3.2.0",
+    "d3": "^5.9.7",
+    "moment": "^2.24.0"
+  }
 }
