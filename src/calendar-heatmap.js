@@ -380,8 +380,8 @@ module.exports = function () {
     function monthPath(t0) {
       var cellSize = SQUARE_LENGTH + SQUARE_PADDING;
       var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
-          d0 = t0.getDay(), w0 = d3.time.weeksInYear(t0),
-          d1 = t1.getDay(), w1 = d3.time.weeksInYear(t0);
+          d0 = t0.getDay(), w0 = d3.time.weekOfYear(t0),
+          d1 = t1.getDay(), w1 = d3.time.weekOfYear(t0);
       return 'M' + (w0 + 1) * cellSize + ',' + d0 * cellSize +
           'H' + w0 * cellSize + 'V' + 7 * cellSize +
           'H' + w1 * cellSize + 'V' + (d1 + 1) * cellSize +
